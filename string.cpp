@@ -44,6 +44,9 @@ bool String::is_empty() const
 
 int String::len(const char* str) const
 {
+    if(is_empty()){
+    return; 
+    }
     int count = 0;
     while (str[count++] != '\0') {}
 
@@ -52,6 +55,9 @@ int String::len(const char* str) const
 
 void String::append(const String& str)
 {
+    if(is_empty()){
+    return; 
+    }
     char* temp_str = new char[m_size + str.m_size + 1];
 
     int i, j = 0;
