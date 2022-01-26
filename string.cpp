@@ -45,7 +45,7 @@ bool String::is_empty() const
 int String::len(const char* str) const
 {
     if(is_empty()){
-    return; 
+    return 0; 
     }
     int count = 0;
     while (str[count++] != '\0') {}
