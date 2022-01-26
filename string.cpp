@@ -42,7 +42,9 @@ bool String::is_empty() const
     return m_size == 0;
 }
 
-int String::len(const char* str) const
+int String::
+
+(const char* str) const
 {
     if(is_empty()){
     return 0; 
@@ -137,11 +139,13 @@ bool String::operator<(const String& str) const
 
 char& String::operator[](int index)
 {
+    assert(m_ptr == nullptr || is_empty() || index < 0 || index >= m_size);
     return m_str[index];
 }
 
 const char& String::operator[](int index) const
 {
+    assert(m_ptr == nullptr || is_empty() || index < 0 || index >= m_size);
     return m_str[index];
 }
 
@@ -153,12 +157,25 @@ void String::swap(String& str)
 
     str = temp;
 }
+// dz
+// barev dzez
 
-int String::find_first_of(char c)
+int String::find_first_of(const char* str)
 {
+    int str_len = len(str);
+    int res_index = -1;
+   
     for (int i = 0; i < m_size; ++i)
     {
-        if (m_str[i] == c)
+        for (int j = 0; j < str_len; ++j)
+        {
+            if ((i + j < m_size) && (m_str[i + j] != str[j]))
+            {
+                break;
+            }
+        }
+        
+        if (j == str_len)
         {
             return i;
         }
