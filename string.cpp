@@ -157,8 +157,6 @@ void String::swap(String& str)
 
     str = temp;
 }
-// dz
-// barev dzez
 
 int String::find_first_of(const char* str)
 {
