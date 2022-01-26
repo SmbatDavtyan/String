@@ -22,9 +22,9 @@ int main()
 
         std::cout << "After appending: a = " << a << ", b = " << b << '\n';
 
-        int index = a.find_first_of('o');
+        int index = a.find_first_of("llo");
 
-        std::cout << "First index of 'o' in a is: " << index << '\n';
+        std::cout << "First index of 'llo' in a is: " << index << '\n';
 
         return 0;
 }

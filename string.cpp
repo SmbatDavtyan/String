@@ -1,6 +1,7 @@
 #include "string.h"
 #include <string>
 #include <cstring>
+#include <cassert>
 
 String::String()
 {
@@ -42,9 +43,7 @@ bool String::is_empty() const
     return m_size == 0;
 }
 
-int String::
-
-(const char* str) const
+int String::len(const char* str) const
 {
     if(is_empty()){
     return 0; 
@@ -139,13 +138,13 @@ bool String::operator<(const String& str) const
 
 char& String::operator[](int index)
 {
-    assert(m_ptr == nullptr || is_empty() || index < 0 || index >= m_size);
+    assert(m_str != nullptr && !is_empty() && index >= 0 && index < m_size);
     return m_str[index];
 }
 
 const char& String::operator[](int index) const
 {
-    assert(m_ptr == nullptr || is_empty() || index < 0 || index >= m_size);
+    assert(m_str != nullptr && !is_empty() && index >= 0 && index < m_size);
     return m_str[index];
 }
 
@@ -165,7 +164,8 @@ int String::find_first_of(const char* str)
    
     for (int i = 0; i < m_size; ++i)
     {
-        for (int j = 0; j < str_len; ++j)
+	int j;
+        for (j = 0; j < str_len; ++j)
         {
             if ((i + j < m_size) && (m_str[i + j] != str[j]))
             {
