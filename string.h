@@ -26,7 +26,7 @@ public:
     const char & operator[](int index) const;
 
     void swap(String & str);
-    int find_first_of(char c);
+    int find_first_of(const char* str);
 
     bool is_empty() const;
 
