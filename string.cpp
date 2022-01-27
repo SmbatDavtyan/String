@@ -43,6 +43,16 @@ bool String::is_empty() const
     return m_size == 0;
 }
 
+int String::strcmp(const char * s1, const char * s2) const 
+{
+    int it = 0;
+    while(s1[it] != '\0' && (s1[it] == s2[it]))
+    {
+        it++;
+    }
+    return (const unsigned char)s1[it] - (const unsigned char)s2[it]; 
+}
+
 int String::len(const char* str) const
 {
     if(is_empty()){
