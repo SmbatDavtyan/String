@@ -18,7 +18,7 @@ public:
      const String & operator=(const String & str);
      String operator+(const String & str) const;
      const String & operator+=(const String & str);
-
+     int strcmp(const char *) const;
     bool operator<(const String & str) const;
     friend std::ostream &operator<<(std::ostream& out, const String& str);
 
