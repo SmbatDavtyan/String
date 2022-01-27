@@ -22,15 +22,9 @@ String::String(const char* str)
 }
 
 String::String(const String& str)
+	:m_str(nullptr)
 {
-    m_size = str.m_size;
-    m_str = new char[m_size + 1];
-    m_str[m_size] = '\0';
-
-    for (int i = 0; i < m_size; ++i)
-    {
-        m_str[i] = str.m_str[i];
-    }
+    *this = str;
 }
 
 String::~String()
@@ -40,10 +34,10 @@ String::~String()
 
 bool String::is_empty() const
 {
-    return m_size == 0;
+    return m_size == 0 || m_str == nullptr;
 }
 
-int String::strcmp(const char * s1, const char * s2) const 
+int String::strcmp(const char * s1, const char * s2)  
 {
     int it = 0;
     while(s1[it] != '\0' && (s1[it] == s2[it]))
@@ -66,36 +60,15 @@ int String::len(const char* str) const
 
 void String::append(const String& str)
 {
-    if(is_empty()){
-    return; 
-    }
-    char* temp_str = new char[m_size + str.m_size + 1];
-
-    int i, j = 0;
-
-    for (i = 0; i < m_size; ++i)
-    {
-        temp_str[i] = m_str[i];
-    }
-
-    for (i = m_size; i < m_size + str.m_size; ++i)
-    {
-        temp_str[i] = str.m_str[j++];
-    }
-
-    m_size = m_size + str.m_size;
-
-    temp_str[m_size] = '\0';
-
-    delete[] m_str;
-
-    m_str = temp_str;
+	*this += str; 
+							
 }
 
 const String& String::operator=(const String& str)
 {
     m_size = str.m_size;
-    delete[] m_str;
+    if (!is_empty())
+   	 delete[] m_str;
 
     m_str = new char[m_size + 1];
     m_str[m_size] = '\0';
@@ -143,18 +116,23 @@ const String& String::operator+=(const String& str)
 
 bool String::operator<(const String& str) const
 {
-    return strcmp(m_str, str.m_str) == -1;
+    return strcmp(m_str, str.m_str) < 0;
 }
 
 char& String::operator[](int index)
 {
-    assert(m_str != nullptr && !is_empty() && index >= 0 && index < m_size);
+    assert(!is_empty() && valid_index(index));
     return m_str[index];
+}
+
+bool String::valid_index(int index) const
+{
+    return (index >= 0 && index < m_size);
 }
 
 const char& String::operator[](int index) const
 {
-    assert(m_str != nullptr && !is_empty() && index >= 0 && index < m_size);
+    assert(!is_empty() && valid_index(index));
     return m_str[index];
 }
 

@@ -15,12 +15,14 @@ public:
     inline int get_size() const { return m_size; }
     void append(const String & str);
 public:
-     const String & operator=(const String & str);
-     String operator+(const String & str) const;
-     const String & operator+=(const String & str);
-     int strcmp(const char *) const;
+    const String & operator=(const String & str);
+    String operator+(const String & str) const;
+    const String & operator+=(const String & str);
+    static int strcmp(const char *, const char *);
     bool operator<(const String & str) const;
     friend std::ostream &operator<<(std::ostream& out, const String& str);
+    operator const char *() const { return m_str; }
+    bool valid_index(int index) const;
 
     char & operator[](int index);
     const char & operator[](int index) const;

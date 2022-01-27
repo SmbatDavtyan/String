@@ -1,6 +1,6 @@
 #include "string.h"
 #include <iostream>
-
+#include <cstring>
 #include <string>
 
 int main()
@@ -25,7 +25,12 @@ int main()
         int index = a.find_first_of("llo");
 
         std::cout << "First index of 'llo' in a is: " << index << '\n';
+	
+	a = "adsfadsfasdfadsddf";
+	b = "asdfadfadsfffvczxv";
 
+	std::cout << "std::strcmp a < b = " << std::strcmp(a,b) << std::endl;
+	std::cout << "my_strcmp a < b = " << String::strcmp(a,b) << std::endl;
         return 0;
 }
 
